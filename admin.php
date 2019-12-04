@@ -190,7 +190,7 @@
         $stmt->execute(array($_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'], 'test', $_POST['address'], $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'], $_POST['rent'], $id));
         echo "<div class='alert alert-success'>Property saved!</div>";
     } else {
-        $stmt= $pdo->prepare("INSERT INTO property ( Id, County, Country, Town, Description, Full_Details_URL, Displayable_Address, Numbedrooms, Numbathrooms, Price, PropertyType, ForSale, ForRent) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt= $pdo->prepare("INSERT INTO property ( Id, County, Country, Town, Description, Displayable_Address, Numbedrooms, Numbathrooms, Price, PropertyType, ForSale, ForRent) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute(array(random_bytes(16), $_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'], 'test', $_POST['address'],  $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'], $_POST['rent']));
         echo "<div class='alert alert-success'>New property added!</div>";
     }
