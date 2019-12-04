@@ -28,17 +28,25 @@
       $baseurl = "http://trialapi.craig.mtcdevserver.com/";
       $properties_url = "api/properties";
       $api_key = "3NLTTNlXsi6rBWl7nYGluOdkl2htFHug";
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, $baseurl . $properties_url . "?api_key=" . $api_key);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      $result = json_decode(curl_exec($ch));
-      
-      
-      
-     foreach($result->data as $prop){
-      insert_prop($prop);
-     }
+
+      if($_GET['update']='y'){
+        update(); 
+      }
+
+      function update(){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $baseurl . $properties_url . "?api_key=" . $api_key);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = json_decode(curl_exec($ch));
+        
+        
+        
+      foreach($result->data as $prop){
+        insert_prop($prop);
+      }
       curl_close($ch);
+      echo "Updated!";
+    }
 
       function insert_prop($prop){
         try {
@@ -47,7 +55,6 @@
           $stmt = $pdo->prepare("SELECT *  FROM property WHERE Id = ?");
           $stmt->execute(array($prop->uuid));
           $exists = $stmt->rowCount();
-          var_dump($exists); 
           if($prop->type == "sale"){
             $sale = "y";
             $rent = "n";
