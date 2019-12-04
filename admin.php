@@ -101,6 +101,7 @@
         $prop = $stmt->fetch();
     } 
     ?>
+    <div class="container">
         <form method="POST" action="?Submit=<?php if(isset($prop->id)){ echo $prop->id; } else { echo "New"; } ?>">
             <div class="form-group">
                 <label for="county">County</label>
@@ -128,6 +129,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+    </div>
     <?php 
   }
     
