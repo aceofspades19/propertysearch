@@ -31,9 +31,36 @@
       
       
      foreach($result->data as $prop){
-      echo $prop->address . "<br>"; 
+      insert_prop($prop);
      }
       curl_close($ch);
+
+      function insert_prop($prop){
+        try {
+          $dbh = new PDO('mysql:host=localhost;dbname=properties', "root", "toor");
+          $stmt = $pdo->prepare("SELECT *  FROM property WHERE Id = ?");
+          $stmt->execute($prop->uuid);
+          $exists = $stmt->rowCount();
+          if($prop->type == "sale"){
+            $sale = "y";
+            $rent = "n";
+          } else {
+            $sale = "n";
+            $rent = "y";
+          }
+          if($exists > 0){
+
+          } else {
+            $stmt= $pdo->prepare("INSERT INTO property ( Id, County, Country, Town, Description, Full_Details_URL, Displayable_Address, Image_URL, Thumbnail_URL, Latitude, Longitude, Numbedrooms, Numbathrooms, Price, PropertyType, ForSale, ForRent), VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
+            $stmt->execute([$prop->uuid, $prop->county, $prop->country, $prop->town, $prop->description, "test", $prop->address, $prop->image_full, $prop->image_thumbnail, $prop->latitude, $prop->longitude, $prop->num_bedrooms, $prop->num_bathrooms, $prop->price, $prop->property_type_id, $sale, $rent]);
+          }
+
+          
+        } catch (PDOException $e) {
+            print "Error!: " . $e->getMessage() . "<br/>";
+            die();
+        }
+      }
     ?>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
