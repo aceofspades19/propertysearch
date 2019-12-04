@@ -28,7 +28,7 @@
       $result = curl_exec($ch);
       
       
-      print_r($result);
+      print_r($result["data"]);
       curl_close($ch);
     ?>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
