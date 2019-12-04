@@ -20,7 +20,16 @@
   <body>
     <h1>Property Search</h1>
     <?php 
-      echo "hello"; 
+      $baseurl = "http://trialapi.craig.mtcdevserver.com/";
+      $properties_url = "api/properties";
+      $api_key = "3NLTTNlXsi6rBWl7nYGluOdkl2htFHug";
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $baseurl . $properties_url . "?api_key=" . $api_key);
+      $result = curl_exec($ch);
+      
+      
+      print_r($result);
+      curl_close($ch);
     ?>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
