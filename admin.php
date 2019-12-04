@@ -82,9 +82,11 @@
   function delete($id){
     $pdo = new PDO('mysql:host=localhost;dbname=properties', "root", "toor");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $pdo->prepare("DELETE FROM movies WHERE id = id");
+    $stmt = $pdo->prepare("DELETE FROM property WHERE id = id");
     $stmt->bindParam(':id', $id);   
     $stmt->execute();
+    echo "<div class='alert alert-success'>Property deleted!</div>";
+    show(); 
   }
     
     ?>
