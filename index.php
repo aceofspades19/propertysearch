@@ -30,7 +30,9 @@
       
       
       
-      print_r($result->data[0]);
+     foreach($result->data as $prop){
+      echo $prop->address . "<br>"; 
+     }
       curl_close($ch);
     ?>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
