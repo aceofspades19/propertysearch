@@ -102,7 +102,7 @@
     if($id != "New"){
         $stmt = $pdo->prepare("SELECT *  FROM property WHERE Id = ?");
         $stmt->execute(array($id));
-        $prop = $stmt->fetch();
+        $prop = $stmt->fetchObject();
         var_dump($prop); 
     } 
     ?>
