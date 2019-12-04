@@ -40,6 +40,13 @@
             <tr>
               <th scope="col">Image</th>
               <th scope="col">Address</th>
+              <th scope="col">County</th>
+              <th scope="col">Country</th>
+              <th scope="col">Numbedrooms</th>
+              <th scope="col">Numbathrooms</th>
+              <th scope="col">Price</th>
+              <th scope="col">For Sale</th>
+              <th scope="col">For Rent</th>
             </tr>
           </thead>
           <tbody>
@@ -51,7 +58,14 @@
           foreach ($data as $row) {
             echo "<tr><td><img src='" . $row["Thumbnail_URL"] . "'></td>";
             echo "<td>" . $row['Displayable_Address'] . "</td>";
-
+            echo "<td>" . $row['Town'] . "</td>";
+            echo "<td>" . $row['County'] . "</td>";
+            echo "<td>" . $row['Country'] . "</td>";
+            echo "<td>" . $row['Numbedrooms'] . "</td>";
+            echo "<td>" . $row['Numbathrooms'] . "</td>";
+            echo "<td>" . $row['Price'] . "</td>";
+            echo "<td>" . $row['ForSale'] . "</td>";
+            echo "<td>" . $row['ForRent'] . "</td>";
             echo "</tr>";
            }
         } catch (PDOException $e) {
