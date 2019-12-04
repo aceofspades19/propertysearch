@@ -26,7 +26,7 @@
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_URL, $baseurl . $properties_url . "?api_key=" . $api_key);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      $result = curl_exec($ch);
+      $result = json_decode(curl_exec($ch));
       
       
       
