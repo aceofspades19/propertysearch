@@ -182,7 +182,7 @@
   }
 
   function edit_submit(){
-    $id = $_POST['Submit'];
+    $id = $_GET['Submit'];
     $pdo = new PDO('mysql:host=localhost;dbname=properties', "root", "toor");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if($id != "New"){
