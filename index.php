@@ -27,7 +27,7 @@
     <?php 
    
 
-      if($_GET['update']='y'){
+      if($_GET['update']=='y'){
         update(); 
       } else {
         show(); 
