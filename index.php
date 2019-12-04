@@ -30,7 +30,7 @@
       
       
       
-      print_r($result);
+      print_r($result->data[0]);
       curl_close($ch);
     ?>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
