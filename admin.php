@@ -103,7 +103,6 @@
         $stmt = $pdo->prepare("SELECT *  FROM property WHERE Id = ?");
         $stmt->execute(array($id));
         $prop = $stmt->fetchObject();
-        var_dump($prop); 
     } 
     ?>
     <div class="container">
@@ -137,7 +136,11 @@
                 <select class="form-control" id="numbedrooms" name="numbedrooms">
                 <?php 
                     for($i=0;$i<10;$i++){
-                        echo "<option value='" . $i . "'>" . $i . "</option>";
+                        if(isset($prop->Numbedrooms) && $prop->Numbedrooms == $i){
+                            echo "<option value='" . $i . "' selected='selected'>" . $i . "</option>";
+                        } else {
+                            echo "<option value='" . $i . "'>" . $i . "</option>";
+                        }
                     }
                 ?>
                 </select>
@@ -147,18 +150,22 @@
                 <select class="form-control" id="numbathrooms" name="numbathrooms">
                 <?php 
                     for($i=0;$i<10;$i++){
-                        echo "<option value='" . $i . "'>" . $i . "</option>";
+                        if(isset($prop->Numbathrooms) && $prop->Numbathrooms == $i){
+                            echo "<option value='" . $i . "' selected='selected'>" . $i . "</option>";
+                        } else {
+                            echo "<option value='" . $i . "'>" . $i . "</option>";
+                        }
                     }
                 ?>
                 </select>
             </div>
             <div class="form-group">
                 <label for="rent" class="form-check-label">For Rent</label>
-                <input type="radio" class="form-check-input" id="rent" name="rent" value="y">
+                <input type="radio" class="form-check-input" id="rent" name="rent" value="y" <?php if(isset($prop->ForSale) && $prop->ForSale=="y"){ echo "checked"; } ?> >
             </div>
             <div class="form-group">
                 <label for="sale" class="form-check-label">For Sale</label>
-                <input type="radio" class="form-check-input" id="sale" name="sale" value="y">
+                <input type="radio" class="form-check-input" id="sale" name="sale" value="y" <?php if(isset($prop->ForRent) && $prop->ForRent=="y"){ echo "checked"; } ?>>
             </div>
             <div class="form-group">
             <?php if(isset($prop->Thumbnail_URL)){ echo "<img src='" . $prop->Thumbnail_URL . "'>"; } ?>
