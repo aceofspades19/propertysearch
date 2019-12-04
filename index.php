@@ -59,7 +59,7 @@
 
           } else {
             $stmt= $pdo->prepare("INSERT INTO property ( Id, County, Country, Town, Description, Full_Details_URL, Displayable_Address, Image_URL, Thumbnail_URL, Latitude, Longitude, Numbedrooms, Numbathrooms, Price, PropertyType, ForSale, ForRent) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
-            $stmt->execute(array($prop->uuid, $prop->county, $prop->country, $prop->town, $prop->description, "test", $prop->address, $prop->image_full, $prop->image_thumbnail, $prop->latitude, $prop->longitude, $prop->num_bedrooms, $prop->num_bathrooms, $prop->price, $prop->property_type_id, $sale, $rent));
+            $stmt->execute(array($prop->uuid, $prop->county, $prop->country, $prop->town, $prop->description, 'test', $prop->address, $prop->image_full, $prop->image_thumbnail, $prop->latitude, $prop->longitude, $prop->num_bedrooms, $prop->num_bathrooms, $prop->price, $prop->property_type_id, $sale, $rent));
           }
 
           
