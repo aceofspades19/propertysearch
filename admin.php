@@ -30,7 +30,7 @@
 
     function show(){
         ?>
-        <a href="?Edit=New" class='btn btn-default'>Add New Property</a> 
+        <a href="?Edit=New" class='btn btn-default'>Add New Property</a><br>
         <table class="table">
         <thead>
             <tr>
@@ -61,8 +61,8 @@
             echo "<td>" . $row['Numbedrooms'] . "</td>";
             echo "<td>" . $row['Numbathrooms'] . "</td>";
             echo "<td>" . $row['Price'] . "</td>";
-            echo "<td><a href='?Edit='" . $row["id"] . "' class='btn btn-default'>Edit</a></td>";
-            echo "<td><a href='?Delete='" . $row["id"] . "' class='btn btn-default'>Delete</a></td>";
+            echo "<td><a href='?Edit=" . $row["id"] . "' class='btn btn-default'>Edit</a></td>";
+            echo "<td><a href='?Delete=" . $row["id"] . "' class='btn btn-default'>Delete</a></td>";
             echo "</tr>";
         }
         } catch (PDOException $e) {
