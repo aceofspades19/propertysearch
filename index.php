@@ -29,6 +29,40 @@
 
       if($_GET['update']='y'){
         update(); 
+      } else {
+        show(); 
+      }
+
+      function show(){
+        ?>
+          <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">Address</th>
+            </tr>
+          </thead>
+          <tbody>
+        <?php 
+        try {
+          $pdo = new PDO('mysql:host=localhost;dbname=properties', "root", "toor");
+          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $data = $pdo->query("SELECT *  FROM property")->fetchAll();     
+          foreach ($data as $row) {
+            echo "<tr><td><img src='" . $row["Thumbnail_URL"] . "'></td>";
+            echo "<td>" . $row['Address'] . "</td>";
+
+            echo "</tr>";
+           }
+        } catch (PDOException $e) {
+            print "Error!: " . $e->getMessage() . "<br/>";
+            die();
+        }
+
+        ?>
+         </tbody>
+        </table>
+        <?php 
       }
 
       function update(){
