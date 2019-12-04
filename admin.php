@@ -53,7 +53,6 @@
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $data = $pdo->query("SELECT *  FROM property")->fetchAll();     
         foreach ($data as $row) {
-            print_r($row);
             echo "<tr><td><img src='" . $row["Thumbnail_URL"] . "'></td>";
             echo "<td>" . $row['Displayable_Address'] . "</td>";
             echo "<td>" . $row['Town'] . "</td>";
@@ -62,8 +61,8 @@
             echo "<td>" . $row['Numbedrooms'] . "</td>";
             echo "<td>" . $row['Numbathrooms'] . "</td>";
             echo "<td>" . $row['Price'] . "</td>";
-            echo "<td><a href='?Edit='" . $row["Id"] . "' class='btn btn-default'>Edit</a></td>";
-            echo "<td><a href='?Delete='" . $row["Id"] . "' class='btn btn-default'>Delete</a></td>";
+            echo "<td><a href='?Edit='" . $row["id"] . "' class='btn btn-default'>Edit</a></td>";
+            echo "<td><a href='?Delete='" . $row["id"] . "' class='btn btn-default'>Delete</a></td>";
             echo "</tr>";
         }
         } catch (PDOException $e) {
