@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+  <?php
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
+  ?>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
