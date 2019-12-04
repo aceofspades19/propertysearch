@@ -44,7 +44,7 @@
         try {
           $pdo = new PDO('mysql:host=localhost;dbname=properties', "root", "toor");
           $stmt = $pdo->prepare("SELECT *  FROM property WHERE Id = ?");
-          $stmt->execute($prop->uuid);
+          $stmt->execute(array($prop->uuid));
           $exists = $stmt->rowCount();
           if($prop->type == "sale"){
             $sale = "y";
