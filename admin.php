@@ -33,7 +33,7 @@
 
     function show(){
         ?>
-        <a href="?Edit=New" class='btn btn-default'>Add New Property</a><br>
+        <a href="?Edit=New" class='btn btn-default'>Add New Property</a><br><br><br>
         <table class="table">
         <thead>
             <tr>
