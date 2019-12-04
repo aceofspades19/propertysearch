@@ -46,6 +46,7 @@
           $stmt = $pdo->prepare("SELECT *  FROM property WHERE Id = ?");
           $stmt->execute(array($prop->uuid));
           $exists = $stmt->rowCount();
+          var_dump($exists); 
           if($prop->type == "sale"){
             $sale = "y";
             $rent = "n";
