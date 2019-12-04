@@ -27,7 +27,7 @@
     <?php 
    
 
-      if($_GET['update']=='y'){
+      if(isset($_GET['update']) && $_GET['update']=='y'){
         update(); 
       } else {
         show(); 
@@ -49,6 +49,7 @@
           $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           $data = $pdo->query("SELECT *  FROM property")->fetchAll();     
           foreach ($data as $row) {
+            print_r($row); 
             echo "<tr><td><img src='" . $row["Thumbnail_URL"] . "'></td>";
             echo "<td>" . $row['Address'] . "</td>";
 
