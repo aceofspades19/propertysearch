@@ -125,11 +125,11 @@
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" value="<?php if(isset($prop->displayable_address)){ echo $prop->$prop->displayable_address; } ?>">
+                <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" value="<?php if(isset($prop->displayable_address)){ echo $prop->displayable_address; } ?>">
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
-                <input type="text" class="form-control" id="price" name="price" placeholder="Enter Price" value="<?php if(isset($prop->price)){ echo $prop->$prop->price; } ?>">
+                <input type="text" class="form-control" id="price" name="price" placeholder="Enter Price" value="<?php if(isset($prop->price)){ echo $prop->price; } ?>">
             </div>
             <div class="form-group">
                 <label for="numbedrooms">Number of Bedrooms</label>
@@ -160,7 +160,7 @@
                 <input type="radio" class="form-check-input" id="sale" name="sale" value="y">
             </div>
             <div class="form-group">
-            <?php if(isset($prop->Thumbnail_URL)){ echo "<img src='" . $prop->$prop->Thumbnail_URL . "'>"; } ?>"
+            <?php if(isset($prop->Thumbnail_URL)){ echo "<img src='" . $prop->Thumbnail_URL . "'>"; } ?>
                 <label for="imageupload">Image Upload</label>
                 <input type="file" class="form-control-file" id="imageupload" name="image">
             </div>
