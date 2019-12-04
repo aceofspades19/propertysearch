@@ -110,27 +110,27 @@
         <form method="POST" action="?Submit=<?php if(isset($prop->id)){ echo $prop->id; } else { echo "New"; } ?>" enctype='multipart/form-data'>
             <div class="form-group">
                 <label for="county">County</label>
-                <input type="text" class="form-control" id="county" name="county" placeholder="Enter County" value="<?php if(isset($prop->county)){ echo $prop->county; } ?>">
+                <input type="text" class="form-control" id="county" name="county" placeholder="Enter County" value="<?php if(isset($prop->County)){ echo $prop->County; } ?>">
             </div>
             <div class="form-group">
                 <label for="country">Country</label>
-                <input type="text" class="form-control" id="country" name="country" placeholder="Enter Country" value="<?php if(isset($prop->country)){ echo $prop->country; } ?>">
+                <input type="text" class="form-control" id="country" name="country" placeholder="Enter Country" value="<?php if(isset($prop->Country)){ echo $prop->Country; } ?>">
             </div>
             <div class="form-group">
                 <label for="town">Town</label>
-                <input type="text" class="form-control" id="town" name="town" placeholder="Enter Town" value="<?php if(isset($prop->town)){ echo $prop->town; } ?>">
+                <input type="text" class="form-control" id="town" name="town" placeholder="Enter Town" value="<?php if(isset($prop->Town)){ echo $prop->Town; } ?>">
             </div>
             <div class="form-group">
                 <label for="Description">Description</label>
-                <textarea id="Description" name="description" class="form-control"><?php if(isset($prop->description)){ echo $prop->description; } ?></textarea>
+                <textarea id="Description" name="description" class="form-control"><?php if(isset($prop->Description)){ echo $prop->Description; } ?></textarea>
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" value="<?php if(isset($prop->displayable_address)){ echo $prop->displayable_address; } ?>">
+                <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" value="<?php if(isset($prop->Displayable_Address)){ echo $prop->Displayable_Address; } ?>">
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
-                <input type="text" class="form-control" id="price" name="price" placeholder="Enter Price" value="<?php if(isset($prop->price)){ echo $prop->price; } ?>">
+                <input type="text" class="form-control" id="price" name="price" placeholder="Enter Price" value="<?php if(isset($prop->Price)){ echo $prop->Price; } ?>">
             </div>
             <div class="form-group">
                 <label for="numbedrooms">Number of Bedrooms</label>
