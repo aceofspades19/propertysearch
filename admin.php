@@ -34,6 +34,10 @@
         show(); 
     }
 
+    if(isset($_POST['Submit'])){
+        edit_submit();
+    }
+
     function show(){
         ?>
         <a href="?Edit=New" class='btn btn-default'>Add New Property</a><br><br><br>
@@ -102,35 +106,84 @@
     } 
     ?>
     <div class="container">
-        <form method="POST" action="?Submit=<?php if(isset($prop->id)){ echo $prop->id; } else { echo "New"; } ?>">
+        <form method="POST" action="?Submit=<?php if(isset($prop->id)){ echo $prop->id; } else { echo "New"; } ?>" enctype='multipart/form-data'>
             <div class="form-group">
                 <label for="county">County</label>
-                <input type="text" class="form-control" id="county" placeholder="Enter County">
+                <input type="text" class="form-control" id="county" name="county" placeholder="Enter County" value="<?php if(isset($prop->county)){ echo $prop->county; } ?>">
             </div>
             <div class="form-group">
                 <label for="country">Country</label>
-                <input type="text" class="form-control" id="country" placeholder="Enter Country">
+                <input type="text" class="form-control" id="country" name="country" placeholder="Enter Country" value="<?php if(isset($prop->country)){ echo $prop->country; } ?>">
             </div>
             <div class="form-group">
                 <label for="town">Town</label>
-                <input type="text" class="form-control" id="town" placeholder="Enter Town">
-            </div>
-            <div class="form-group">
-                <label for="postcode">Post Code</label>
-                <input type="text" class="form-control" id="postcode" placeholder="Enter Post Code">
+                <input type="text" class="form-control" id="town" name="town" placeholder="Enter Town" value="<?php if(isset($prop->town)){ echo $prop->town; } ?>">
             </div>
             <div class="form-group">
                 <label for="Description">Description</label>
-                <textarea id="Description" name="description" class="form-control"></textarea>
+                <textarea id="Description" name="description" class="form-control"><?php if(isset($prop->description)){ echo $prop->description; } ?></textarea>
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" placeholder="Enter Address">
+                <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" value="<?php if(isset($prop->displayable_address)){ echo $prop->$prop->displayable_address; } ?>">
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" class="form-control" id="price" name="price" placeholder="Enter Price" value="<?php if(isset($prop->price)){ echo $prop->$prop->price; } ?>">
+            </div>
+            <div class="form-group">
+                <label for="numbedrooms">Number of Bedrooms</label>
+                <select class="form-control" id="numbedrooms" name="numbedrooms">
+                <?php 
+                    for($i=0;$i<10;$i++){
+                        echo "<option value='" . $i . "'>" . $i . "</option>";
+                    }
+                ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="numbathrooms">Number of Bathrooms</label>
+                <select class="form-control" id="numbathrooms" name="numbathrooms">
+                <?php 
+                    for($i=0;$i<10;$i++){
+                        echo "<option value='" . $i . "'>" . $i . "</option>";
+                    }
+                ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="rent" class="form-check-label">For Rent</label>
+                <input type="radio" class="form-check-input" id="rent" name="rent" value="y">
+            </div>
+            <div class="form-group">
+                <label for="sale" class="form-check-label">For Sale</label>
+                <input type="radio" class="form-check-input" id="sale" name="sale" value="y">
+            </div>
+            <div class="form-group">
+            <?php if(isset($prop->Thumbnail_URL)){ echo "<img src='" . $prop->$prop->Thumbnail_URL . "'>"; } ?>"
+                <label for="imageupload">Image Upload</label>
+                <input type="file" class="form-control-file" id="imageupload" name="image">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
     <?php 
+  }
+
+  function edit_submit(){
+    $id = $_POST['Submit'];
+    $pdo = new PDO('mysql:host=localhost;dbname=properties', "root", "toor");
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    if($id != "New"){
+        $stmt= $pdo->prepare("UPDATE property SET  County=?, Country=?, Town=?, Description=?, Full_Details_URL=?, Displayable_Address=?, Image_URL=?, Thumbnail_URL=?, Numbedrooms=?, Numbathrooms=?, Price=?, ForSale=?, ForRent=? WHERE Id=?");
+        $stmt->execute(array($_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'], 'test', $_POST['address'], $prop->image_full, $prop->image_thumbnail, $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'], $_POST['rent'], $id));
+        echo "<div class='alert alert-success'>Property saved!</div>";
+    } else {
+
+        echo "<div class='alert alert-success'>New property added!</div>";
+    }
+
+   
   }
     
     ?>
