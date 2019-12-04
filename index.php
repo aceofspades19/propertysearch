@@ -25,15 +25,16 @@
   <body>
     <h1>Property Search</h1>
     <?php 
-      $baseurl = "http://trialapi.craig.mtcdevserver.com/";
-      $properties_url = "api/properties";
-      $api_key = "3NLTTNlXsi6rBWl7nYGluOdkl2htFHug";
+   
 
       if($_GET['update']='y'){
         update(); 
       }
 
       function update(){
+        $baseurl = "http://trialapi.craig.mtcdevserver.com/";
+        $properties_url = "api/properties";
+        $api_key = "3NLTTNlXsi6rBWl7nYGluOdkl2htFHug";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $baseurl . $properties_url . "?api_key=" . $api_key);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
