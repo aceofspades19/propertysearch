@@ -99,6 +99,7 @@
   function edit($id){
     $pdo = new PDO('mysql:host=localhost;dbname=properties', "root", "toor");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo $id; 
     if($id != "New"){
         $stmt = $pdo->prepare("SELECT *  FROM property WHERE Id = ?");
         $stmt->execute(array($id));
