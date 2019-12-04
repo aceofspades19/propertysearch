@@ -27,6 +27,9 @@
     <?php 
     if(isset($_GET['Delete'])){
         delete($_GET['Delete']);
+    } 
+    elseif(isset($_GET['Edit'])){
+        edit($_GET['Edit']);
     } else {
         show(); 
     }
@@ -87,6 +90,45 @@
     $stmt->execute();
     echo "<div class='alert alert-success'>Property deleted!</div>";
     show(); 
+  }
+
+  function edit($id){
+    $pdo = new PDO('mysql:host=localhost;dbname=properties', "root", "toor");
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    if($id != "New"){
+        $stmt = $pdo->prepare("SELECT *  FROM property WHERE Id = ?");
+        $stmt->execute(array($id));
+        $prop = $stmt->fetch();
+    } 
+    ?>
+        <form method="POST" action="?Submit=<?php if(isset($prop->id)){ echo $prop->id; } else { echo "New"; } ?>">
+            <div class="form-group">
+                <label for="county">County</label>
+                <input type="text" class="form-control" id="county" placeholder="Enter County">
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <input type="text" class="form-control" id="country" placeholder="Enter Country">
+            </div>
+            <div class="form-group">
+                <label for="town">Town</label>
+                <input type="text" class="form-control" id="town" placeholder="Enter Town">
+            </div>
+            <div class="form-group">
+                <label for="postcode">Post Code</label>
+                <input type="text" class="form-control" id="postcode" placeholder="Enter Post Code">
+            </div>
+            <div class="form-group">
+                <label for="Description">Description</label>
+                <textarea id="Description" name="description" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" placeholder="Enter Address">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    <?php 
   }
     
     ?>
