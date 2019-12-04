@@ -40,6 +40,7 @@
             <tr>
               <th scope="col">Image</th>
               <th scope="col">Address</th>
+              <th scope="col">Town</th>
               <th scope="col">County</th>
               <th scope="col">Country</th>
               <th scope="col">Numbedrooms</th>
