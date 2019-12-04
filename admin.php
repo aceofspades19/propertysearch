@@ -30,13 +30,16 @@
     } 
     elseif(isset($_GET['Edit'])){
         edit($_GET['Edit']);
-    } else {
+    }
+    elseif(isset($_GET['Submit'])){
+        edit_submit();
+        show(); 
+    }
+    else {
         show(); 
     }
 
-    if(isset($_POST['Submit'])){
-        edit_submit();
-    }
+
 
     function show(){
         ?>
