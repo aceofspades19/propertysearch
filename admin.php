@@ -183,11 +183,12 @@
     $pdo = new PDO('mysql:host=localhost;dbname=properties', "root", "toor");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if($id != "New"){
-        $stmt= $pdo->prepare("UPDATE property SET  County=?, Country=?, Town=?, Description=?, Full_Details_URL=?, Displayable_Address=?, Image_URL=?, Thumbnail_URL=?, Numbedrooms=?, Numbathrooms=?, Price=?, ForSale=?, ForRent=? WHERE Id=?");
-        $stmt->execute(array($_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'], 'test', $_POST['address'], $prop->image_full, $prop->image_thumbnail, $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'], $_POST['rent'], $id));
+        $stmt= $pdo->prepare("UPDATE property SET  County=?, Country=?, Town=?, Description=?, Full_Details_URL=?, Displayable_Address=?, Numbedrooms=?, Numbathrooms=?, Price=?, ForSale=?, ForRent=? WHERE Id=?");
+        $stmt->execute(array($_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'], 'test', $_POST['address'], $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'], $_POST['rent'], $id));
         echo "<div class='alert alert-success'>Property saved!</div>";
     } else {
-
+        $stmt= $pdo->prepare("INSERT INTO property ( Id, County, Country, Town, Description, Full_Details_URL, Displayable_Address, Image_URL, Thumbnail_URL, Latitude, Longitude, Numbedrooms, Numbathrooms, Price, PropertyType, ForSale, ForRent) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute(array(random_bytes(16), $_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'], 'test', $_POST['address'],  $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'], $_POST['rent']));
         echo "<div class='alert alert-success'>New property added!</div>";
     }
 
