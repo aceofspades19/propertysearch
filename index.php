@@ -43,8 +43,8 @@
               <th scope="col">Town</th>
               <th scope="col">State</th>
               <th scope="col">Country</th>
-              <th scope="col">Numbedrooms</th>
-              <th scope="col">Numbathrooms</th>
+              <th scope="col">Number of bedrooms</th>
+              <th scope="col">Number of bathrooms</th>
               <th scope="col">Price</th>
               <th scope="col">For Sale</th>
               <th scope="col">For Rent</th>
