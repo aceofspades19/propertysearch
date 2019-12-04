@@ -51,7 +51,7 @@
           foreach ($data as $row) {
             print_r($row); 
             echo "<tr><td><img src='" . $row["Thumbnail_URL"] . "'></td>";
-            echo "<td>" . $row['Address'] . "</td>";
+            echo "<td>" . $row['Displayable_Address'] . "</td>";
 
             echo "</tr>";
            }
