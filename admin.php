@@ -183,20 +183,59 @@
 
   function edit_submit(){
     $id = $_GET['Submit'];
+    //upload file if there is any 
+    if(isset($_FILES['image'])){
+        $name = $_FILES["image"]["name"];
+        move_uploaded_file($_FILES["image"]["tmp_name"], "uploads/" . $name);
+        $path = "uploads/" . $name;
+        resize_image($path, 200, 200, $name);
+    } else {
+        $path = ""; 
+    }
+    
+    
+
+    //update or insert into database 
     $pdo = new PDO('mysql:host=localhost;dbname=properties', "root", "toor");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if($id != "New"){
-        $stmt= $pdo->prepare("UPDATE property SET  County=?, Country=?, Town=?, Description=?, Full_Details_URL=?, Displayable_Address=?, Numbedrooms=?, Numbathrooms=?, Price=?, ForSale=?, ForRent=? WHERE Id=?");
-        $stmt->execute(array($_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'], 'test', $_POST['address'], $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'], $_POST['rent'], $id));
+        $stmt= $pdo->prepare("UPDATE property SET  County=?, Country=?, Town=?, Description=?, Full_Details_URL=?, Displayable_Address=?, Numbedrooms=?, Numbathrooms=?, Price=?, ForSale=?, ForRent=? Thumbnail_URL=? WHERE Id=?");
+        $stmt->execute(array($_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'], 'test', $_POST['address'], $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'], $_POST['rent'], "/uploads/small_" . $name, $id));
         echo "<div class='alert alert-success'>Property saved!</div>";
     } else {
-        $stmt= $pdo->prepare("INSERT INTO property ( Id, County, Country, Town, Description, Displayable_Address, Numbedrooms, Numbathrooms, Price, ForSale, ForRent) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute(array(random_bytes(16), $_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'],  $_POST['address'],  $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'], $_POST['rent']));
+        $stmt= $pdo->prepare("INSERT INTO property ( Id, County, Country, Town, Description, Displayable_Address, Numbedrooms, Numbathrooms, Price, ForSale, ForRent, Thumbnail_URL) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute(array(random_bytes(16), $_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'],  $_POST['address'],  $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'], $_POST['rent'], "/uploads/small_" . $name,));
         echo "<div class='alert alert-success'>New property added!</div>";
     }
 
    
   }
+
+  function resize_image($file, $w, $h, $name="", $crop=FALSE) {
+    list($width, $height) = getimagesize($file);
+    $r = $width / $height;
+    if ($crop) {
+        if ($width > $height) {
+            $width = ceil($width-($width*abs($r-$w/$h)));
+        } else {
+            $height = ceil($height-($height*abs($r-$w/$h)));
+        }
+        $newwidth = $w;
+        $newheight = $h;
+    } else {
+        if ($w/$h > $r) {
+            $newwidth = $h*$r;
+            $newheight = $h;
+        } else {
+            $newheight = $w/$r;
+            $newwidth = $w;
+        }
+    }
+    $src = imagecreatefromjpeg($file);
+    $dst = imagecreatetruecolor($newwidth, $newheight);
+    imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+    imagejpeg($dst,"uploads/" . "small_" . $name);
+}
     
     ?>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
