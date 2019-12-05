@@ -97,7 +97,7 @@
         insert_prop($prop);
       }
       curl_close($ch);
-      echo "Updated!";
+      echo "<div class='alert alert-sucess'>Updated!</a>";
     }
 
     //puts a property into the database, or updates it
