@@ -184,7 +184,7 @@
   function edit_submit(){
     $id = $_GET['Submit'];
     //upload file if there is any 
-    if(isset($_FILES['image'])){
+    if(isset($_FILES['image']["name"])){
         $name = $_FILES["image"]["name"];
         move_uploaded_file($_FILES["image"]["tmp_name"], "uploads/" . $name);
         $path = "uploads/" . $name;
@@ -199,12 +199,24 @@
     $pdo = new PDO('mysql:host=localhost;dbname=properties', "root", "toor");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if($id != "New"){
-        $stmt= $pdo->prepare("UPDATE property SET  County=?, Country=?, Town=?, Description=?, Full_Details_URL=?, Displayable_Address=?, Numbedrooms=?, Numbathrooms=?, Price=?, ForSale=?, ForRent=?, Thumbnail_URL=? WHERE Id=?");
-        $stmt->execute(array($_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'], 'test', $_POST['address'], $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'], $_POST['rent'], "/propertysearch/uploads/small_" . $name, $id));
+        if($name){
+            $stmt= $pdo->prepare("UPDATE property SET  County=?, Country=?, Town=?, Description=?, Full_Details_URL=?, Displayable_Address=?, Numbedrooms=?, Numbathrooms=?, Price=?, ForSale=?, ForRent=?, Thumbnail_URL=? WHERE Id=?");
+            $stmt->execute(array($_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'], 'test', $_POST['address'], $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'], $_POST['rent'], "/propertysearch/uploads/small_" . $name, $id));
+        } else {
+            $stmt= $pdo->prepare("UPDATE property SET  County=?, Country=?, Town=?, Description=?, Full_Details_URL=?, Displayable_Address=?, Numbedrooms=?, Numbathrooms=?, Price=?, ForSale=?, ForRent=? WHERE Id=?");
+            $stmt->execute(array($_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'], 'test', $_POST['address'], $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'],  $id));
+
+        }
         echo "<div class='alert alert-success'>Property saved!</div>";
     } else {
-        $stmt= $pdo->prepare("INSERT INTO property ( Id, County, Country, Town, Description, Displayable_Address, Numbedrooms, Numbathrooms, Price, ForSale, ForRent, Thumbnail_URL) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute(array(random_bytes(16), $_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'],  $_POST['address'],  $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'], $_POST['rent'], "/uploads/small_" . $name,));
+        if($name){
+            $stmt= $pdo->prepare("INSERT INTO property ( Id, County, Country, Town, Description, Displayable_Address, Numbedrooms, Numbathrooms, Price, ForSale, ForRent, Thumbnail_URL) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute(array(random_bytes(16), $_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'],  $_POST['address'],  $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'], $_POST['rent'], "/uploads/small_" . $name));
+        } else {
+            $stmt= $pdo->prepare("INSERT INTO property ( Id, County, Country, Town, Description, Displayable_Address, Numbedrooms, Numbathrooms, Price, ForSale, ForRent) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute(array(random_bytes(16), $_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'],  $_POST['address'],  $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale']));
+
+        }
         echo "<div class='alert alert-success'>New property added!</div>";
     }
 
