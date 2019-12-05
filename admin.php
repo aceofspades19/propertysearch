@@ -131,11 +131,11 @@
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" value="<?php if(isset($prop->Displayable_Address)){ echo $prop->Displayable_Address; } ?>">
+                <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" value="<?php if(isset($prop->Displayable_Address)){ echo $prop->Displayable_Address; } ?>" required>
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
-                <input type="text" class="form-control" id="price" name="price" placeholder="Enter Price" value="<?php if(isset($prop->Price)){ echo $prop->Price; } ?>">
+                <input type="text" class="form-control" id="price" name="price" placeholder="Enter Price" value="<?php if(isset($prop->Price)){ echo $prop->Price; } ?>" required>
             </div>
             <div class="form-group">
                 <label for="numbedrooms">Number of Bedrooms</label>
