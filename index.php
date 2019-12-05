@@ -26,13 +26,14 @@
     <h1>Property Search</h1>
     <?php 
    
-
+      //routing for main page
       if(isset($_GET['update']) && $_GET['update']=='y'){
         update(); 
       } else {
         show(); 
       }
 
+      //shows table list of properties
       function show(){
         ?>
           <table class="table">
@@ -80,6 +81,7 @@
         <?php 
       }
 
+      //updates properties from the API
       function update(){
         $baseurl = "http://trialapi.craig.mtcdevserver.com/";
         $properties_url = "api/properties";
@@ -98,6 +100,7 @@
       echo "Updated!";
     }
 
+    //puts a property into the database, or updates it
       function insert_prop($prop){
         try {
           $pdo = new PDO('mysql:host=localhost;dbname=properties', "root", "toor");
@@ -105,6 +108,7 @@
           $stmt = $pdo->prepare("SELECT *  FROM property WHERE Id = ?");
           $stmt->execute(array($prop->uuid));
           $exists = $stmt->rowCount();
+          //if number of rows is greater than 0 then we know we have to update it instead of inserting it
           if($prop->type == "sale"){
             $sale = "y";
             $rent = "n";

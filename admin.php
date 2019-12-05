@@ -25,6 +25,7 @@
   <body>
     <h1>Property Admin</h1>
     <?php 
+    //routing for admin
     if(isset($_GET['Delete'])){
         delete($_GET['Delete']);
     } 
@@ -40,7 +41,7 @@
     }
 
 
-
+    //displays the list of properties
     function show(){
         ?>
         <a href="?Edit=New" class='btn btn-default'>Add New Property</a><br><br><br>
@@ -89,6 +90,7 @@
     <?php 
   }
 
+  //deletes a property
   function delete($id){
     $pdo = new PDO('mysql:host=localhost;dbname=properties', "root", "toor");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -99,6 +101,7 @@
     show(); 
   }
 
+  //provides form to add/edit a property
   function edit($id){
     $pdo = new PDO('mysql:host=localhost;dbname=properties', "root", "toor");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -181,9 +184,10 @@
     <?php 
   }
 
+  //adds or updates the property in the database
   function edit_submit(){
     $id = $_GET['Submit'];
-    //upload file if there is any 
+    //upload file if there is any and resize it
     if(isset($_FILES['image']["name"])){
         $name = $_FILES["image"]["name"];
         move_uploaded_file($_FILES["image"]["tmp_name"], "uploads/" . $name);
@@ -193,8 +197,6 @@
         $path = ""; 
     }
     
-    
-
     //update or insert into database 
     $pdo = new PDO('mysql:host=localhost;dbname=properties', "root", "toor");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -223,6 +225,7 @@
    
   }
 
+  //resizes an image
   function resize_image($file, $w, $h, $name="", $crop=FALSE) {
     list($width, $height) = getimagesize($file);
     $r = $width / $height;
