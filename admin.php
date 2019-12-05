@@ -213,7 +213,7 @@
             $stmt= $pdo->prepare("INSERT INTO property ( Id, County, Country, Town, Description, Displayable_Address, Numbedrooms, Numbathrooms, Price, ForSale, ForRent, Thumbnail_URL) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->execute(array(random_bytes(16), $_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'],  $_POST['address'],  $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale'], $_POST['rent'], "/propertysearch/uploads/small_" . $name));
         } else {
-            $stmt= $pdo->prepare("INSERT INTO property ( Id, County, Country, Town, Description, Displayable_Address, Numbedrooms, Numbathrooms, Price, ForSale, ForRent) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt= $pdo->prepare("INSERT INTO property ( Id, County, Country, Town, Description, Displayable_Address, Numbedrooms, Numbathrooms, Price, ForSale, ForRent) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->execute(array(random_bytes(16), $_POST['county'], $_POST['country'], $_POST['town'], $_POST['description'],  $_POST['address'],  $_POST['numbedrooms'], $_POST['numbathrooms'], $_POST['price'], $_POST['sale']));
 
         }
