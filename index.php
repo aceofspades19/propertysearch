@@ -57,7 +57,7 @@
           $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           $data = $pdo->query("SELECT *  FROM property")->fetchAll();     
           foreach ($data as $row) {
-            echo "<tr><td><img src='" . $row["Thumbnail_URL"] . "'></td>";
+            echo "<tr><td><a href='". $row["Image_URL"] . "'><img src='" . $row["Thumbnail_URL"] . "'></a></td>";
             echo "<td>" . $row['Displayable_Address'] . "</td>";
             echo "<td>" . $row['Town'] . "</td>";
             echo "<td>" . $row['County'] . "</td>";
